@@ -6,7 +6,6 @@ is a lite version of AnimeBesu.
 - Python 3.x
 - Flask
 - SQLite3
-- Werkzeug
 
 ### Installation and Setup:
 
