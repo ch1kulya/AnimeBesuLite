@@ -3,11 +3,29 @@ import sqlite3
 
 app = Flask(__name__)
 
+# Функция для инициализации базы данных
+def init_db():
+    conn = get_db_connection()
+    with conn:
+        conn.execute('''CREATE TABLE IF NOT EXISTS movies (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        title TEXT NOT NULL,
+                        banner TEXT,
+                        video_url TEXT,
+                        poster TEXT,
+                        description TEXT,
+                        views INTEGER DEFAULT 0
+                        )''')
+    conn.close()
+
 # Функция для получения соединения с базой данных
 def get_db_connection():
-    conn = sqlite3.connect('anime_movies.db')
+    conn = sqlite3.connect('besu.db')
     conn.row_factory = sqlite3.Row
     return conn
+
+# Проверка и инициализация базы данных при запуске приложения
+init_db()
 
 # Функция для получения топ-15 самых просматриваемых фильмов
 def get_top_movies():
